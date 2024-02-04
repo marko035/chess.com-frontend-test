@@ -19,6 +19,7 @@ const props = defineProps<{
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 9px;
   overflow-y: scroll;
+  max-height: 30%;
 }
 
 .list {
@@ -40,6 +41,7 @@ const props = defineProps<{
     height: calc(100% - 100px);
     width: unset;
     aspect-ratio: 0.5;
+    max-height: unset;
   }
 }
 </style>
