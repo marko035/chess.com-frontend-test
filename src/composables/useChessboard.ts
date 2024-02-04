@@ -1,14 +1,16 @@
+import type { Cell } from '@/models/Cell'
+import { Pieces } from '@/models/Pieces'
 import { ref, onMounted } from 'vue'
 
 export function useChessboard() {
-  const chessboard = ref<any[]>([])
+  const chessboard = ref<Cell[][]>([])
   const colsLabels = 'ABCDEFGH'
 
   const initializeChessboard = () => {
     for (let i = 0; i < 8; i++) {
-      const row: any[] = []
+      const row: Cell[] = []
       for (let j = 0; j < 8; j++) {
-        const cell = {
+        const cell: Cell = {
           row: i + 1,
           col: colsLabels[j],
           piece: setPiece(i + 1, colsLabels[j])
@@ -28,22 +30,11 @@ export function useChessboard() {
   }
 }
 
-const piecesOnColumn: any = {
-  A: 'Rook',
-  B: 'Knight',
-  C: 'Bishop',
-  D: 'Queen',
-  E: 'King',
-  F: 'Bishop',
-  G: 'Knight',
-  H: 'Rook'
-}
-
-function setPiece(row: any, col: any) {
+function setPiece(row: number, col: string) {
   let imageSrc = ''
   switch (row) {
     case 1:
-      imageSrc = `light${piecesOnColumn[col]}`
+      imageSrc = `light${Pieces[col as keyof typeof Pieces]}`
       break
     case 2:
       imageSrc = 'lightPawn'
@@ -52,7 +43,7 @@ function setPiece(row: any, col: any) {
       imageSrc = 'darkPawn'
       break
     case 8:
-      imageSrc = `dark${piecesOnColumn[col]}`
+      imageSrc = `dark${Pieces[col as keyof typeof Pieces]}`
       break
     default:
       break

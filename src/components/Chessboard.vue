@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useChessboard } from '../composables/useChessboard.js'
+import type { Cell } from '@/models/Cell'
 
 // import all chesspieces images
 import darkKing from '../../public/dark-king.png'
@@ -39,7 +40,7 @@ const selectedCell = ref<string>('')
 
 const { chessboard } = useChessboard()
 
-function selectCell(cell: any) {
+function selectCell(cell: Cell) {
   selectedCell.value = cell.col + cell.row
   emit('onCellClick', cell.col + cell.row)
 }
