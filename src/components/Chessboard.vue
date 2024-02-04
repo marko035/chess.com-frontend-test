@@ -2,6 +2,35 @@
 import { ref } from 'vue'
 import { useChessboard } from '../composables/useChessboard.js'
 
+// import all chesspieces images
+import darkKing from '../../public/dark-king.png'
+import darkQueen from '../../public/dark-queen.png'
+import darkBishop from '../../public/dark-bishop.png'
+import darkKnight from '../../public/dark-knight.png'
+import darkRook from '../../public/dark-rook.png'
+import darkPawn from '../../public/dark-pawn.png'
+import lightKing from '../../public/light-king.png'
+import lightQueen from '../../public/light-queen.png'
+import lightBishop from '../../public/light-bishop.png'
+import lightKnight from '../../public/light-knight.png'
+import lightRook from '../../public/light-rook.png'
+import lightPawn from '../../public/light-pawn.png'
+
+const piecesImages: any = {
+  darkKing,
+  darkQueen,
+  darkBishop,
+  darkKnight,
+  darkRook,
+  darkPawn,
+  lightKing,
+  lightQueen,
+  lightBishop,
+  lightKnight,
+  lightRook,
+  lightPawn
+}
+
 const emit = defineEmits<{
   (e: 'onCellClick', cellId: string): void
 }>()
@@ -9,10 +38,6 @@ const emit = defineEmits<{
 const selectedCell = ref<string>('')
 
 const { chessboard } = useChessboard()
-
-function createChessPieceUrl(piece: string) {
-  return `src/assets/images/chesspieces/${piece}`
-}
 
 function selectCell(cell: any) {
   selectedCell.value = cell.col + cell.row
@@ -32,7 +57,7 @@ function selectCell(cell: any) {
         }"
         @click="selectCell(cell)"
       >
-        <img v-if="cell.piece" class="piece" :src="createChessPieceUrl(cell.piece)" alt="" />
+        <img v-if="cell.piece" class="piece" :src="piecesImages[cell.piece]" alt="" />
 
         <template v-if="cell.col === 'A'">
           <span :class="['rowLabel', cell.row % 2 === 0 ? 'even' : 'odd']">{{ cell.row }}</span>
@@ -50,7 +75,7 @@ function selectCell(cell: any) {
 
 <style scopped lang="scss">
 .chessboard {
-  background-image: url('../assets/images/chessboard.png');
+  background-image: url('../../public/chessboard.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;

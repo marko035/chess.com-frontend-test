@@ -11,7 +11,7 @@ export function useChessboard() {
         const cell = {
           row: i + 1,
           col: colsLabels[j],
-          piece: setPieceImageSrc(i + 1, colsLabels[j])
+          piece: setPiece(i + 1, colsLabels[j])
         }
         row.push(cell)
       }
@@ -29,30 +29,30 @@ export function useChessboard() {
 }
 
 const piecesOnColumn: any = {
-  A: 'rook.png',
-  B: 'knight.png',
-  C: 'bishop.png',
-  D: 'queen.png',
-  E: 'king.png',
-  F: 'bishop.png',
-  G: 'knight.png',
-  H: 'rook.png'
+  A: 'Rook',
+  B: 'Knight',
+  C: 'Bishop',
+  D: 'Queen',
+  E: 'King',
+  F: 'Bishop',
+  G: 'Knight',
+  H: 'Rook'
 }
 
-function setPieceImageSrc(row: any, col: any) {
+function setPiece(row: any, col: any) {
   let imageSrc = ''
   switch (row) {
     case 1:
-      imageSrc = `light-${piecesOnColumn[col]}`
+      imageSrc = `light${piecesOnColumn[col]}`
       break
     case 2:
-      imageSrc = 'light-pawn.png'
+      imageSrc = 'lightPawn'
       break
     case 7:
-      imageSrc = 'dark-pawn.png'
+      imageSrc = 'darkPawn'
       break
     case 8:
-      imageSrc = `dark-${piecesOnColumn[col]}`
+      imageSrc = `dark${piecesOnColumn[col]}`
       break
     default:
       break
