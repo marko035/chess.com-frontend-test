@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Chessboard from './components/Chessboard.vue'
 import Sidebar from './components/Sidebar.vue'
+
+const selectedCells = ref<string[]>([])
+
+function selectCell(cell: string) {
+  selectedCells.value.push(cell)
+}
 </script>
 
 <template>
   <div class="layout">
-    <Chessboard />
-    <Sidebar />
+    <Chessboard @onCellClick="selectCell" />
+    <Sidebar :selectedCells="selectedCells" />
   </div>
 </template>
 

@@ -1,14 +1,38 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useChessboard } from '../composables/useChessboard.js'
 
+const emit = defineEmits<{
+  (e: 'onCellClick', cellId: string): void
+}>()
+
+const selectedCell = ref<string>('')
+
 const { chessboard } = useChessboard()
+
+function createChessPieceUrl(piece: string) {
+  return `src/assets/images/chesspieces/${piece}`
+}
+
+function selectCell(cell: any) {
+  selectedCell.value = cell.col + cell.row
+  emit('onCellClick', cell.col + cell.row)
+}
 </script>
 
 <template>
   <div class="chessboard">
     <div v-for="(row, rowIndex) in chessboard" :key="rowIndex" class="row">
-      <div v-for="(cell, colIndex) in row" :key="colIndex" class="cell">
-        <!-- {{ cell.col }}{{ cell.row }} -->
+      <div
+        v-for="(cell, colIndex) in row"
+        :key="colIndex"
+        class="cell"
+        :class="{
+          selected: selectedCell === cell.col + cell.row
+        }"
+        @click="selectCell(cell)"
+      >
+        <img v-if="cell.piece" class="piece" :src="createChessPieceUrl(cell.piece)" alt="" />
 
         <template v-if="cell.col === 'A'">
           <span :class="['rowLabel', cell.row % 2 === 0 ? 'even' : 'odd']">{{ cell.row }}</span>
@@ -50,20 +74,22 @@ const { chessboard } = useChessboard()
     position: relative;
   }
 
-  .cell:hover {
+  .cell.selected {
     background-color: #f5f58a;
   }
 
   .rowLabel {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 3px;
+    left: 3px;
+    font-size: 0.5rem;
   }
 
   .columnLabel {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 3px;
+    right: 3px;
+    font-size: 0.5rem;
   }
 
   .odd {
@@ -73,12 +99,21 @@ const { chessboard } = useChessboard()
   .even {
     color: #779952;
   }
+
+  .piece {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 600px) {
   .chessboard {
     height: calc(100% - 100px);
     width: unset;
+  }
+
+  .rowLabel,
+  .columnLabel {
+    font-size: 1rem !important;
   }
 }
 </style>

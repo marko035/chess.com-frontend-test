@@ -1,7 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{
+  selectedCells: string[]
+}>()
+</script>
 
 <template>
-  <div class="sidebar"></div>
+  <div class="sidebar">
+    <ul class="list">
+      <li v-for="(cell, index) in selectedCells" :key="index">{{ index + 1 }}. {{ cell }}</li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss">
@@ -10,6 +18,21 @@
   aspect-ratio: 1;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 9px;
+  overflow-y: scroll;
+}
+
+.list {
+  list-style-type: none;
+  color: hsla(0, 0%, 100%, 0.5);
+  padding: 0;
+
+  li {
+    padding: 10px 20px;
+  }
+
+  li:nth-child(even) {
+    background: hsla(0, 0%, 100%, 0.02);
+  }
 }
 
 @media only screen and (min-width: 600px) {
