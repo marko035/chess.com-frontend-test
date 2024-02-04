@@ -1,47 +1,30 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Chessboard from './components/Chessboard.vue'
+import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="layout">
+    <Chessboard />
+    <Sidebar />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 20px;
+  gap: 50px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+@media only screen and (min-width: 600px) {
+  .layout {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: unset;
+    margin: 50px;
   }
 }
 </style>
