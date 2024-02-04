@@ -7,7 +7,9 @@ const props = defineProps<{
 <template>
   <div class="sidebar">
     <ul class="list">
-      <li v-for="(cell, index) in selectedCells" :key="index">{{ index + 1 }}. {{ cell }}</li>
+      <li v-for="(cell, index) in selectedCells" :key="index">
+        {{ selectedCells.length - index }}. {{ cell }}
+      </li>
     </ul>
   </div>
 </template>

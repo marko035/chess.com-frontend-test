@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar.vue'
 const selectedCells = ref<string[]>([])
 
 function selectCell(cell: string) {
-  selectedCells.value.push(cell)
+  selectedCells.value.unshift(cell)
 }
 </script>
 
