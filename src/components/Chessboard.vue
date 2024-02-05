@@ -1,36 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useChessboard } from '../composables/useChessboard.js'
+import { usePiecesImages } from '@/composables/usePiecesImages'
 import type { Cell } from '@/models/Cell'
-
-// import all chesspieces images
-import darkKing from '../../public/dark-king.png'
-import darkQueen from '../../public/dark-queen.png'
-import darkBishop from '../../public/dark-bishop.png'
-import darkKnight from '../../public/dark-knight.png'
-import darkRook from '../../public/dark-rook.png'
-import darkPawn from '../../public/dark-pawn.png'
-import lightKing from '../../public/light-king.png'
-import lightQueen from '../../public/light-queen.png'
-import lightBishop from '../../public/light-bishop.png'
-import lightKnight from '../../public/light-knight.png'
-import lightRook from '../../public/light-rook.png'
-import lightPawn from '../../public/light-pawn.png'
-
-const piecesImages: any = {
-  darkKing,
-  darkQueen,
-  darkBishop,
-  darkKnight,
-  darkRook,
-  darkPawn,
-  lightKing,
-  lightQueen,
-  lightBishop,
-  lightKnight,
-  lightRook,
-  lightPawn
-}
 
 const emit = defineEmits<{
   (e: 'onCellClick', cellId: string): void
@@ -39,6 +11,7 @@ const emit = defineEmits<{
 const selectedCell = ref<string>('')
 
 const { chessboard } = useChessboard()
+const { piecesImages } = usePiecesImages()
 
 function selectCell(cell: Cell) {
   selectedCell.value = cell.col + cell.row
@@ -76,7 +49,7 @@ function selectCell(cell: Cell) {
 
 <style scopped lang="scss">
 .chessboard {
-  background-image: url('../../public/chessboard.png');
+  background-image: url('/chessboard.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
